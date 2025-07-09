@@ -1,0 +1,171 @@
+CREATE SCHEMA IF NOT EXISTS `moonjeans` DEFAULT CHARACTER SET utf8mb4 ;
+USE `moonjeans` ;
+
+-- Desactivar restricciones
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Eliminar en el orden correcto
+DROP TABLE IF EXISTS detalleCompra;
+DROP TABLE IF EXISTS detalleVenta;
+DROP TABLE IF EXISTS ventas;
+DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS productos;
+DROP TABLE IF EXISTS compras;
+DROP TABLE IF EXISTS proveedores;
+DROP TABLE IF EXISTS categoria;
+
+-- Activar nuevamente restricciones
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- Crear tabla categoria.
+
+CREATE TABLE IF NOT EXISTS `moonjeans`.`categoria` (
+  `idCategoria` INT(11) NOT NULL,
+  `NombreCategoria` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idCategoria`)
+);
+
+-- Crear tabla proveedores.
+
+CREATE TABLE IF NOT EXISTS `moonjeans`.`proveedores` (
+  `idProveedores` INT(11) NOT NULL,
+  `Nombre` VARCHAR(45) NULL DEFAULT NULL,
+  `Direccion` VARCHAR(45) NULL DEFAULT NULL,
+  `TipoProveedor` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idProveedores`)
+);
+
+-- Crear tabla compras.
+
+CREATE TABLE IF NOT EXISTS `moonjeans`.`compras` (
+  `idCompras` INT(11) NOT NULL,
+  `Fecha` DATE NULL DEFAULT NULL,
+  `total` FLOAT NULL DEFAULT NULL,
+  `idProveedores` INT(11) NOT NULL,
+  PRIMARY KEY (`idCompras`),
+  INDEX `proveedores_idProveedores` (`idProveedores` ASC),
+  CONSTRAINT `compras_ibfk_1`
+    FOREIGN KEY (`idProveedores`)
+    REFERENCES `moonjeans`.`proveedores` (`idProveedores`)
+);
+
+
+-- Crear tabla productos.
+
+CREATE TABLE IF NOT EXISTS `moonjeans`.`productos` (
+  `idProductos` INT(11) NOT NULL,
+  `Nombre` VARCHAR(45) NULL DEFAULT NULL,
+  `Descripcion` VARCHAR(45) NULL DEFAULT NULL,
+  `Talla` VARCHAR(45) NULL DEFAULT NULL,
+  `Color` VARCHAR(45) NULL DEFAULT NULL,
+  `Precio` VARCHAR(45) NULL DEFAULT NULL,
+  `Cantidad` VARCHAR(45) NULL DEFAULT NULL,
+  `idCategoria` INT(11) NOT NULL,
+  PRIMARY KEY (`idProductos`),
+  INDEX `categoria_idCategoria` (`idCategoria` ASC),
+  CONSTRAINT `productos_ibfk_1`
+    FOREIGN KEY (`idCategoria`)
+    REFERENCES `moonjeans`.`categoria` (`idCategoria`)
+);
+
+-- Crear tabla detalleCompras.
+
+CREATE TABLE IF NOT EXISTS `moonjeans`.`detalleCompra` (
+  `idDetalleCompra` INT(11) NOT NULL,
+  `Cantidad` INT(11) NULL DEFAULT NULL,
+  `costoUnitario` FLOAT NULL DEFAULT NULL,
+  `idCompras` INT(11) NOT NULL,
+  `idProductos` INT(11) NOT NULL,
+  PRIMARY KEY (`idDetalleCompra`),
+  INDEX `idx_idCompras` (`idCompras` ASC),
+  INDEX `idx_idProductos` (`idProductos` ASC),
+  CONSTRAINT `fk_detalleCompra_compras`
+    FOREIGN KEY (`idCompras`)
+    REFERENCES `moonjeans`.`compras` (`idCompras`),
+  CONSTRAINT `fk_detalleCompra_productos`
+    FOREIGN KEY (`idProductos`)
+    REFERENCES `moonjeans`.`productos` (`idProductos`)
+);
+
+-- Crear tabla usuario.
+
+CREATE TABLE IF NOT EXISTS `moonjeans`.`usuario` (
+  `idUsuario` INT(11) NOT NULL,
+  `Usuario` VARCHAR(45) NULL DEFAULT NULL,
+  `Nombre 1` VARCHAR(45) NULL DEFAULT NULL,
+  `Nombre 2` VARCHAR(45) NULL DEFAULT NULL,
+  `Apellido 1` VARCHAR(45) NULL DEFAULT NULL,
+  `Apellido 2` VARCHAR(45) NULL DEFAULT NULL,
+  `Direccion` VARCHAR(45) NULL DEFAULT NULL,
+  `Telefono` BIGINT(20) NULL DEFAULT NULL,
+  `Contraseña` VARBINARY(255) NOT NULL,
+  `Rol` VARCHAR(20) NULL DEFAULT 'usuario',
+  PRIMARY KEY (`idUsuario`)
+);
+
+-- Crear tabla ventas. 
+
+CREATE TABLE IF NOT EXISTS `moonjeans`.`ventas` (
+  `idVentas` INT(11) NOT NULL,
+  `Fecha` DATE NULL DEFAULT NULL,
+  `total` FLOAT NULL DEFAULT NULL,
+  `idUsuario` INT(11) NOT NULL,
+  PRIMARY KEY (`idVentas`),
+  INDEX `usuario_idUsuario` (`idUsuario` ASC),
+  CONSTRAINT `ventas_ibfk_1`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `moonjeans`.`usuario` (`idUsuario`)
+);
+
+-- Crear tabla Detalle Venta. 
+
+CREATE TABLE IF NOT EXISTS `moonjeans`.`detalleVenta` (
+  `idDetalle_venta` INT(11) NOT NULL,
+  `Cantidad` INT(11) NULL DEFAULT NULL,
+  `PrecioUnitario` FLOAT NULL DEFAULT NULL,
+  `Subtotal` FLOAT NULL DEFAULT NULL,
+  `idVentas` INT(11) NOT NULL,
+  `idProductos` INT(11) NOT NULL,
+  PRIMARY KEY (`idDetalle_venta`),
+  INDEX `fk_detalleventa_ventas1_idx` (`idVentas` ASC),
+  INDEX `fk_detalleventa_productos1_idx` (`idProductos` ASC),
+  CONSTRAINT `fk_detalleventa_ventas1`
+    FOREIGN KEY (`idVentas`)
+    REFERENCES `moonjeans`.`ventas` (`idVentas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_detalleventa_productos1`
+    FOREIGN KEY (`idProductos`)
+    REFERENCES `moonjeans`.`productos` (`idProductos`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+USE `moonjeans` ;
+
+DROP FUNCTION IF EXISTS desencriptar;
+
+-- Funciones desencriptar.
+
+DELIMITER $$
+USE `moonjeans`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `desencriptar`(clave_encriptada VARBINARY(255)) RETURNS varchar(255) CHARSET utf8mb4 COLLATE utf8mb4_general_ci
+    DETERMINISTIC
+BEGIN
+  RETURN CAST(AES_DECRYPT(clave_encriptada, 'clave_secreta') AS CHAR(255));
+END$$
+
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS encriptar;
+
+-- Funcion encriptar.
+
+DELIMITER $$
+USE `moonjeans`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `encriptar`(clave VARCHAR(255)) RETURNS varbinary(255)
+    DETERMINISTIC
+BEGIN
+  RETURN AES_ENCRYPT(clave, 'clave_secreta');
+END$$
+
+DELIMITER ;
