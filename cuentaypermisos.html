@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Usuarios</title>
+  <link rel="stylesheet" href="css/cuentaypermisos.css" />
+<header class="navbar">
+    <div class="logo">Inventario mond | Administrador</div>
+    <nav>
+      <ul class="menu">
+        <li><a href="inventario.html">Inventario</a></li>
+        <li><a href="reportes.htm">Reportes</a></li>
+        <li><a href="provedores.html">Proveedores</a></li>
+        <li><a href="cuentaypermisos.html">Cuenta/Permisos</a></li>
+        <li><a href="roles.html">Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contenedor">
+    <h1>Gestión de Usuarios</h1>
+
+    <!-- Agregar -->
+    <div class="form-seccion">
+      <h2>Agregar Usuario</h2>
+      <form action="control_usuario.php" method="POST">
+        <input type="hidden" name="accion" value="agregar">
+        <label>Usuario</label><input type="text" name="usuario" required>
+        <label>Primer Nombre</label><input type="text" name="nombre1" required>
+        <label>Segundo Nombre</label><input type="text" name="nombre2">
+        <label>Primer Apellido</label><input type="text" name="apellido1" required>
+        <label>Segundo Apellido</label><input type="text" name="apellido2">
+        <label>Dirección</label><input type="text" name="direccion" required>
+        <label>Teléfono</label><input type="number" name="telefono" required>
+        <label>Contraseña</label><input type="password" name="contrasena" required>
+        <label>Rol</label>
+        <select name="rol" required>
+          <option value="cliente">Cliente</option>
+          <option value="usuario">Usuario</option>
+          <option value="administrador">Administrador</option>
+        </select>
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+
+    <!-- Eliminar -->
+    <div class="form-seccion">
+      <h2>Eliminar Usuario</h2>
+      <form action="control_usuario.php" method="POST">
+        <input type="hidden" name="accion" value="eliminar">
+        <label>Usuario</label><input type="text" name="usuario" required>
+        <button type="submit">Eliminar</button>
+      </form>
+    </div>
+
+  <!-- Editar -->
+<div class="form-seccion">
+  <h2>Editar Datos del Usuario</h2>
+  <form action="control_usuario.php" method="POST">
+    <input type="hidden" name="accion" value="editar">
+    <label>Usuario</label><input type="text" name="usuario" required>
+    <label>Primer Nombre</label><input type="text" name="nombre1" required>
+    <label>Segundo Nombre</label><input type="text" name="nombre2">
+    <label>Primer Apellido</label><input type="text" name="apellido1" required>
+    <label>Segundo Apellido</label><input type="text" name="apellido2">
+    <label>Dirección</label><input type="text" name="direccion" required>
+    <label>Teléfono</label><input type="number" name="telefono" required>
+    
+    <label>Rol</label>
+    <select name="rol" required>
+      <option value="cliente">Cliente</option>
+      <option value="usuario">Usuario</option>
+      <option value="administrador">Administrador</option>
+    </select>
+
+    <button type="submit">Editar</button>
+  </form>
+</div>

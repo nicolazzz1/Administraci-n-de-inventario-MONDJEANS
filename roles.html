@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mond Jeans - Moda y estilo</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/roles.css" />
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Mond Jeans</a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#catalogo">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#quienes">Quiénes somos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ubicacion">Ubicación</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="toggleCarrito" title="Ver carrito">
+                        <i class="bi bi-bag-fill fs-5"></i>
+                    </a>
+                </li>
+            </ul>
+            <button class="btn btn-primary ms-lg-3" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar sesión</button>
+        </div>
+    </div>
+</nav>
+
+<header class="bg-light py-5 text-center">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Mond Jeans</h1>
+        <p class="lead">Estilo y calidad en cada prenda</p>
+        <img src="img/logo.jpeg" class="img-fluid rounded shadow" alt="Logo" style="max-width: 180px;" />
+    </div>
+</header>
+
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form id="loginForm" class="modal-content p-3 needs-validation" novalidate action="login_process.php" method="POST">
+            <div class="modal-header">
+                <h5 class="modal-title">Iniciar Sesión</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="loginErrorMessage" class="alert alert-danger mt-3 d-none"></div>
+
+                <div class="mb-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select class="form-select" id="rol" name="rol" required>
+                        <option value="">Selecciona...</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="usuario">Usuario</option>
+                    </select>
+                    <div class="invalid-feedback">Selecciona un rol.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="usuario" name="usuario" required />
+                    <div class="invalid-feedback">Ingresa tu usuario.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required />
+                    <div class="invalid-feedback">Ingresa contraseña.</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<section id="catalogo" class="py-5 ms-lg-5" style="margin-left: 300px;">
+    <div class="container">
+        <h2 class="text-center mb-4">Lo más reciente</h2>
+        <div class="row" id="productList"></div>
+    </div>
+</section>
+
+<div id="carritoSidebar" class="carrito-sidebar">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">🛒 Carrito</h5>
+        <button id="cerrarCarrito" class="btn btn-sm btn-close"></button>
+    </div>
+    <ul id="carritoLista" class="list-group mb-3"></ul>
+    <h5>Total: <span id="totalCarrito">$0</span></h5>
+</div>
+
+<section class="text-center my-5">
+    <h3 class="mb-3">¿Te gusta lo que ves?</h3>
+    <p>Haz parte de la comunidad Mond Jeans y encuentra tu estilo hoy.</p>
+    <a href="#catalogo" class="btn btn-outline-dark">Ver más productos</a>
+</section>
+
+<section id="quienes" class="bg-light py-5">
+    <div class="container text-center">
+        <h2>Quiénes somos</h2>
+        <p class="mb-4">Somos Mond Jeans, una marca colombiana comprometida con estilo, calidad y sostenibilidad.</p>
+        <div class="row">
+            <div class="col-md-4"><div class="card p-3"><h5>Misión</h5><p>Diseñar prendas con autenticidad.</p></div></div>
+            <div class="col-md-4"><div class="card p-3"><h5>Visión</h5><p>Ser líderes en la moda urbana colombiana.</p></div></div>
+            <div class="col-md-4"><div class="card p-3"><h5>Valores</h5><p>Sostenibilidad, comunidad, calidad.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<section id="ubicacion" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Encuéntranos aquí</h2>
+        <div class="ratio ratio-16x9">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3976.871074443789!2d-74.10445982413333!3d4.617078742374976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1ssan%20andresito%20de%20la%2038!5e0!3m2!1ses-419!2sco!4v1751843498209!5m2!1ses-419!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-dark text-white text-center py-3">
+    Mond Jeans
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/roles.js"></script>
+</body>
+</html>

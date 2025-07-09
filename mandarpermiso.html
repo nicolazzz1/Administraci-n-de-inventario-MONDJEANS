@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitud de Permiso</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .contenedor {
+      max-width: 500px;
+      margin: 60px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      text-align: left;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .mensaje {
+      font-size: 1.2em;
+      color: #28a745;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .oculto {
+      display: none;
+    }
+
+    .btn-volver {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #6c757d;
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-volver:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor">
+    <h1>Solicitar Permiso</h1>
+
+    <form id="formPermiso">
+      <label for="motivo">Motivo del permiso:</label>
+      <textarea id="motivo" name="motivo" rows="4" required placeholder="Escribe aquí el motivo de tu solicitud..."></textarea>
+
+      <label for="fecha">Fecha solicitada:</label>
+      <input type="date" id="fecha" name="fecha" required>
+
+      <button type="submit">Enviar Solicitud</button>
+    </form>
+
+    <!-- Mensaje de confirmación -->
+    <div id="mensajeConfirmacion" class="mensaje oculto">
+       ¡Tu solicitud de permiso ha sido enviada con éxito!
+      <br>
+      <a href="usuario.html" class="btn-volver">← Volver al Inicio</a>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('formPermiso');
+    const mensaje = document.getElementById('mensajeConfirmacion');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // Evita recarga
+      form.style.display = 'none';
+      mensaje.classList.remove('oculto');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventario | InventarioApp</title>
+  <link rel="stylesheet" href="css/inventario.css" />
+  <style>
+    /* Tamaño uniforme para todas las imágenes */
+    .tabla-inventario img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de navegación -->
+  <header class="navbar">
+    <div class="logo">Inventario mond | Administrador</div>
+    <nav>
+      <ul class="menu">
+        <li><a href="aministrador.html">Inicio</a></li>
+        <li><a href="inventario.html">Inventario</a></li>
+        <li><a href="reportes.htm">Reportes</a></li> 
+        <li><a href="provedores.html">Proveedores</a></li>
+        <li><a href="cuentaypermisos.html">Cuenta/Permisos</a></li>
+        <li><a href="roles.html">Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contenedor principal -->
+  <main class="contenedor">
+    <h1>Gestión de Inventario</h1>
+
+    <!-- Formulario para agregar un nuevo producto -->
+    <div class="agregar-producto">
+      <h2>Agregar Producto</h2>
+      <form action="agregar_producto.php" method="POST" enctype="multipart/form-data">
+        <label for="nombre">Nombre del Producto</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="categoria">Categoría</label>
+        <select id="categoria" name="categoria">
+          <option value="jeans_hombre">Jeans Hombre</option>
+          <option value="blusas">Blusas</option>
+          <option value="camisas">Camisas</option>
+          <option value="jeans_mujer">Jeans Mujer</option>
+          <option value="camisetas">Camisetas</option>
+        </select>
+
+        <label for="cantidad">Cantidad</label>
+        <input type="number" id="cantidad" name="cantidad" required />
+
+        <label for="imagen">Imagen del Producto</label>
+        <input type="file" id="imagen" name="imagen" accept="image/*" required />
+
+        <button type="submit">Agregar Producto</button>
+      </form>
+    </div>
+
+    <!-- Tabla de Inventario -->
+    <h2>Productos en Inventario</h2>
+    <table class="tabla-inventario">
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Cantidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <tr>
+          <td><img src="img/jean hombre hiop.jpg" alt="Jeans de Hombre" /></td>
+          <td>Jeans de Hombre</td>
+          <td>Jeans Hombre rijido americano</td>
+          <td>50</td>
+          <td>
+            <button class="editar">Editar</button>
+            <button class="eliminar">Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td><img src="img/crop top.jpg" alt="Blusa de Mujer" /></td>
+          <td>Blusa de Mujer</td>
+          <td>Blusa tela fria</td>
+          <td>30</td>
+          <td>
+            <button class="editar">Editar</button>
+            <button class="eliminar">Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td><img src="img/camiseta.jpeg" alt="Camisa Casual" /></td>
+          <td>Camisa </td>
+          <td>Camisa con botones ameri</td>
+          <td>40</td>
+          <td>
+            <button class="editar">Editar</button>
+            <button class="eliminar">Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td><img src="img/jeanmujer.jpeg" alt="Jeans de Mujer" /></td>
+          <td>Jeans de Mujer</td>
+          <td>Jeans Mujer licrado ff </td>
+          <td>20</td>
+          <td>
+            <button class="editar">Editar</button>
+            <button class="eliminar">Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td><img src="img/camisahombre.jpeg" alt="Camiseta Básica" /></td>
+          <td>Camiseta</td>
+          <td>Camiseta sin botones</td>
+          <td>60</td>
+          <td>
+            <button class="editar">Editar</button>
+            <button class="eliminar">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+</body>
+</html>

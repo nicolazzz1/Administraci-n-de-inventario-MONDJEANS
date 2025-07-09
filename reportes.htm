@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reportes | InventarioApp</title>
+  <link rel="stylesheet" href="css/inventario.css" />
+  <style>
+    .grafico-box {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 300px !important;
+    }
+
+    .btn-imprimir {
+      display: inline-block;
+      margin: 1rem 0;
+      padding: 0.6rem 1.2rem;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-imprimir:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de navegación -->
+  <header class="navbar">
+    <div class="logo">Inventario mond | Administrador</div>
+    <nav>
+      <ul class="menu">
+        <li><a href="aministrador.html">Inicio</a></li>
+        <li><a href="inventario.html">Inventario</a></li>
+        <li><a href="provedores.html">Proveedores</a></li>
+        <li><a href="cuentaypermisos.html">Cuenta/Permisos</a></li>
+        <li><a href="roles.html">Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contenido de reportes -->
+  <main class="contenedor">
+    <h1> Reportes de Inventario</h1>
+
+    <button class="btn-imprimir" onclick="window.print()">🖨 Imprimir Reporte</button>
+
+    <div class="grafico-box">
+      <h3>Productos en Inventario</h3>
+      <canvas id="graficoProductos"></canvas>
+    </div>
+
+    <div class="grafico-box">
+      <h3>Movimientos de Productos</h3>
+      <canvas id="graficoMovimientos"></canvas>
+    </div>
+
+    <div class="grafico-box">
+      <h3>Entradas Mensuales</h3>
+      <canvas id="graficoEntradas"></canvas>
+    </div>
+
+    <div class="grafico-box">
+      <h3>Salidas Mensuales</h3>
+      <canvas id="graficoSalidas"></canvas>
+    </div>
+  </main>
+
+  <!-- Chart.js y script externo -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/reportes.js"></script>
+</body>
+</html>

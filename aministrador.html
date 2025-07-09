@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administrador</title>
+  <link rel="stylesheet" href="css/administrador.css" />
+</head>
+<body>
+
+  <!-- Menú de navegación -->
+  <header class="navbar">
+    <div class="logo">Inventario mond | Administrador</div>
+    <nav>
+      <ul class="menu">
+        <li><a href="inventario.html">Inventario</a></li>
+        <li><a href="reportes.htm">Reportes</a></li>
+        <li><a href="provedores.html">Proveedores</a></li>
+        <li><a href="cuentaypermisos.html">Cuenta/Permisos</a></li>
+        <li><a href="roles.html">Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="bienvenida">
+    <h1>Bienvenido al Panel de Administración</h1>
+    <p>Has iniciado sesión como <strong>Administrador</strong>. Gestiona todos los módulos del sistema desde aquí.</p>
+
+    <!-- Módulos principales -->
+    <div class="modulos">
+
+      <!-- Inventario -->
+      <div class="modulo">
+        <img src="img/inventarios.png" alt="Inventario" width="80" />
+        <h2>Inventario</h2>
+        <p>Gestiona entradas, salidas y el control de stock.</p>
+        <a href="inventario.html" class="btn">Ir al módulo</a>
+      </div>
+
+      <!-- Reportes -->
+      <div class="modulo">
+        <img src="img/resportes.jpeg" alt="Reportes" width="105" />
+        <h2>Reportes</h2>
+        <p>Genera reportes detallados del sistema.</p>
+        <a href="reportes.htm" class="btn">Ir al módulo</a>
+      </div>
+
+      <!-- Proveedores -->
+      <div class="modulo">
+        <img src="img/proveedores.jpeg" alt="Proveedores" width="120" />
+        <h2>Proveedores</h2>
+        <p>Administra proveedores y sus compras.</p>
+        <a href="provedores.html" class="btn">Ir al módulo</a>
+      </div>
+
+      <!-- Usuarios -->
+      <div class="modulo">
+        <img src="img/permisos.jpeg" alt="Usuarios" width="115" />
+        <h2>Cuenta y permisos</h2>
+        <p>Edita tu información personal y agrega permisos.</p>
+        <a href="cuentaypermisos.html" class="btn">Ir al módulo</a>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
+

@@ -1,0 +1,153 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+  }
+  
+  /* Contenedor principal */
+  .contenedor {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Título principal */
+  .contenedor h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+  }
+  
+  /* Imagen del logo */
+  .contenedor img {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 120px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+  }
+  
+  .contenedor img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Texto introductorio */
+  .intro {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    color: #555;
+  }
+  
+  /* Formulario */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  input, select {
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Botón */
+  button {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Información extra */
+  .info {
+    margin-top: 25px;
+    font-size: 0.9em;
+    color: #777;
+  }
+  .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto al pasar el mouse por la tarjeta */
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen del producto */
+.card-img-top {
+  transition: transform 0.4s ease;
+}
+
+/* Efecto zoom a la imagen */
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+/* Carrito lateral oculto */
+#carrito {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 320px;
+  height: 100vh;
+  background-color: #fff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  z-index: 1040;
+  transition: right 0.4s ease;
+  padding: 20px;
+}
+
+/* Cuando se activa el carrito */
+#carrito.activo {
+  right: 0;
+}
+ .carrito-sidebar {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      height: 100%;
+      background: #fff;
+      box-shadow: -3px 0 15px rgba(0, 0, 0, 0.1);
+      z-index: 1055;
+      padding: 20px;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .carrito-sidebar.open {
+      right: 0;
+    }
+  
