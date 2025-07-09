@@ -1,0 +1,24 @@
+-- crear función encriptar --
+
+DELIMITER $$
+
+CREATE FUNCTION encriptar_AES(clave VARCHAR(255)) RETURNS VARBINARY(255)
+  DETERMINISTIC
+BEGIN
+  RETURN AES_ENCRYPT(clave, 'clave_secreta');
+END$$
+
+DELIMITER ;
+
+-- mostrar contraseña encriptada --
+SELECT encriptar_AES('miContrasenaSecreta');
+
+-- usuario de prueba --
+INSERT INTO moonjeans.usuario (idUsuario, Usuario, `Nombre 1`, `Nombre 2`, `Apellido 1`, `Apellido 2`, Direccion, Telefono, Contraseña, Rol)
+VALUES (51, 'usuarioPrueba', 'Juan', 'Carlos', 'Perez', 'Gomez', 'Calle Falsa 123', 1234567890, AES_ENCRYPT('contrasenaSegura123', 'clave_secreta'), 'administrador');
+
+
+-- mostrar usuario de prueba --
+SELECT idUsuario, Usuario, Contraseña, AES_DECRYPT(Contraseña, 'clave_secreta') AS ContrasenaDesencriptada
+FROM moonjeans.usuario
+WHERE idUsuario = 51;
