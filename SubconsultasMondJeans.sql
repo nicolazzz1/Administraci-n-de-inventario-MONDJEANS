@@ -1,0 +1,50 @@
+-- Productos vendidos con totales
+SELECT p.Nombre AS producto, UPPER(c.NombreCategoria) AS categoria,
+  (
+    SELECT SUM(dv.Cantidad)
+    FROM detalleVenta dv
+    WHERE dv.idProductos = p.idProductos
+  ) AS total_vendido
+FROM productos p
+INNER JOIN categoria c ON p.idCategoria = c.idCategoria;
+
+-- Compras por mes
+SELECT cp.idCompras, MONTH(cp.Fecha) AS mes, pr.Nombre AS proveedor,
+  (
+    SELECT SUM(dc.Cantidad)
+    FROM detalleCompra dc
+    WHERE dc.idCompras = cp.idCompras
+  ) AS total_productos
+FROM compras cp
+INNER JOIN proveedores pr ON cp.idProveedores = pr.idProveedores;
+
+-- Usuarios con ventas superiores al promedio
+SELECT LOWER(CONCAT(u.`Nombre 1`, ' ', u.`Apellido 1`)) AS usuario, v.total
+FROM ventas v
+INNER JOIN usuario u ON v.idUsuario = u.idUsuario
+WHERE v.total > (
+  SELECT AVG(v2.total)
+  FROM ventas v2
+);
+
+-- Comparar inventario vs compras
+SELECT p.Nombre, p.Cantidad AS stock,
+  (
+    SELECT SUM(dc.Cantidad)
+    FROM detalleCompra dc
+    WHERE dc.idProductos = p.idProductos
+  ) AS total_comprado
+FROM productos p;
+
+-- Ventas por encima del promedio de precio unitario
+SELECT v.idVentas, v.total,
+  (
+    SELECT AVG(dv.PrecioUnitario)
+    FROM detalleVenta dv
+    WHERE dv.idVentas = v.idVentas
+  ) AS promedio_venta
+FROM ventas v
+WHERE v.total > (
+  SELECT AVG(dv2.PrecioUnitario)
+  FROM detalleVenta dv2
+);
